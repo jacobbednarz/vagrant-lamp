@@ -14,8 +14,6 @@ $ cd vagrant-lamp
 $ vagrant up
 ````
 
-That is pretty simple.
-
 ### Connecting
 
 Apache: The Apache server is available at http://localhost:8888
@@ -23,8 +21,8 @@ Apache: The Apache server is available at http://localhost:8888
 MySQL: Externally the MySQL server is available at port 8889, and when running on
 the VM it is available as a socket or at port 3306 as usual.  
 
-Username: root
-Password: root
+- Username: root
+- Password: root
 
 ### Technical Details
 
@@ -34,6 +32,6 @@ Password: root
 - MySQL 5.5
 
 The web root is located in the project directory at `htdocs` and you can install
-your files there
+your files there.
 
 Accessing the box is as straight forward as `vagrant ssh`.
