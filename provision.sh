@@ -26,7 +26,11 @@ sed -i "s/^${IPADDR}.*//" /etc/hosts
 echo $IPADDR ubuntu.localhost >> /etc/hosts # Just to quiet down some error messages
 
 # Install basic tools.
-apt-get -y install build-essential binutils-doc git
+apt-get -y install build-essential binutils-doc git python-software-properties
+
+# Use PHP 5.6 PPA
+add-apt-repository ppa:ondrej/php5-5.6
+apt-get update
 
 # Install Apache.
 apt-get -y install apache2
