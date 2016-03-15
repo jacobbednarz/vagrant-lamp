@@ -2,6 +2,7 @@
 
 php_config_file="/etc/php5/apache2/php.ini"
 xdebug_config_file="/etc/php5/mods-available/xdebug.ini"
+xhprof_config_file="/etc/php5/mods-available/xhprof.ini"
 mysql_config_file="/etc/mysql/my.cnf"
 
 # Update the server.
@@ -34,7 +35,7 @@ apt-get update
 
 # Install Apache.
 apt-get -y install apache2
-apt-get -y install php5 php5-curl php5-mysql php5-sqlite php5-xdebug
+apt-get -y install php5 php5-dev php5-curl php5-mysql php5-sqlite php5-xdebug php-pear
 
 sed -i "s/display_startup_errors = Off/display_startup_errors = On/g" ${php_config_file}
 sed -i "s/display_errors = Off/display_errors = On/g" ${php_config_file}
@@ -46,6 +47,15 @@ xdebug.remote_connect_back=1
 xdebug.remote_port=9000
 xdebug.remote_host=10.0.2.2
 EOF
+
+# Install xhprof.
+sudo pecl install -f xhprof-beta
+cat << EOF > ${xhprof_config_file}
+[xhprof]
+extension=xhprof.so
+xhprof.output_dir="/tmp/xhprof"
+EOF
+php5enmod xhprof
 
 # Install MySQL.
 echo "mysql-server mysql-server/root_password password root" | sudo debconf-set-selections
